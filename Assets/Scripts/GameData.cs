@@ -28,7 +28,7 @@ public class GameData : MonoBehaviour
     {
         scenarioSO.scenarioMasterData = new ScenarioMasterData();
 
-        scenarioSO.scenarioMasterData = LoadMasterDataFromJson.LoadScenarioMasterDataFromJson();
+        scenarioSO.scenarioMasterData = LoadMasterDataFromJason.LoadScenarioMasterDataFromJson();
         
         foreach (ScenarioMasterData.ScenarioData scenarioData in scenarioSO.scenarioMasterData.scenario)
         {

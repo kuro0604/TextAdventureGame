@@ -893,6 +893,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92a491e136951dc40b74fd4f177fd9d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scenarioSO: {fileID: 11400000, guid: 3bfab6e5171b5764aad9d6ddc267b630, type: 2}
 --- !u!4 &1191417286
 Transform:
   m_ObjectHideFlags: 0

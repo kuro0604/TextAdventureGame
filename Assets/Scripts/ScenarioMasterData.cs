@@ -14,11 +14,12 @@ public class ScenarioMasterData
         public string messageString;
         public string charaNoString;
         public string branchString;
+        public string displayCharaString;
         public string backgroundImageNo;
-    }
 
-    public string[] messages;
-    public CHARA_NAME_TYPE[] charaTypes;
-    public int[] branchs;
-    public Dictionary<int, CHARA_NAME_TYPE[]> displayCharas;
+        public string[] messages;
+        public CHARA_NAME_TYPE[] charaTypes;
+        public int[] branchs;
+        public Dictionary<int, CHARA_NAME_TYPE[]> displayCharas;
+    }
 }

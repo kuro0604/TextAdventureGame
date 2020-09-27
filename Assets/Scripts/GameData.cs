@@ -7,7 +7,7 @@ using System.Linq;
 public class GameData : MonoBehaviour
 {
     public static GameData instance;
-    public ScenarioSO scenarioSO;
+    public Scenario scenarioSO;
 
     void Awake()
     {
@@ -26,11 +26,11 @@ public class GameData : MonoBehaviour
 
     private void CreateScenarioDataList()
     {
-        scenarioSO.scenarioMasterData = new ScenarioMasterData();
-
-        scenarioSO.scenarioMasterData = LoadMasterDataFromJason.LoadScenarioMasterDataFromJson();
         
-        foreach (ScenarioMasterData.ScenarioData scenarioData in scenarioSO.scenarioMasterData.scenario)
+
+        
+        
+        foreach (Scenario.Param scenarioData in scenarioSO.sheets[0].list)
         {
             scenarioData.messages = scenarioData.messageString.Split(',').ToArray();
 
@@ -42,7 +42,7 @@ public class GameData : MonoBehaviour
 
             int i = 0;
 
-            scenarioData.displayCharas = new Dictionary<int, CHARA_NAME_TYPE[]>();
+       　   scenarioData.displayCharas = new Dictionary<int, CHARA_NAME_TYPE[]>();
 
             foreach (string str in strList)
             {

@@ -15,6 +15,8 @@ public class TextMessageViewer : MonoBehaviour
 
     public GameObject tapIconObj;
 
+    public int[] branchs;
+
     private int messagesIndex = 0;
     private int wordCount;
     private bool isTapped = false;
@@ -26,7 +28,28 @@ public class TextMessageViewer : MonoBehaviour
     {
         tapIconObj.SetActive(false);
 
+        //StartCoroutine(DisplayMessage());
+    }
+
+    public void SetUpScenarioData(Scenario.Param scenarioData)
+    {
+        //Debug.Log("シナリオ番号 : " + scenarioData.senarioNo  + " のシナリオデータをセット");
+
+        messages = new string[scenarioData.charaTypes.Length];
+        messages = scenarioData.messages;
+
+        charaTypes = new CHARA_NAME_TYPE[scenarioData.charaTypes.Length];
+        charaTypes = scenarioData.charaTypes;
+
+        branchs = new int[scenarioData.branchs.Length];
+        branchs = scenarioData.branchs;
+
+        messagesIndex = 0;
+        isDisplayedAllMessage = false;
+
         StartCoroutine(DisplayMessage());
+        Debug.Log("シナリオ　再生開始");
+
     }
 
     

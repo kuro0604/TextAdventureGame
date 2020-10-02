@@ -24,6 +24,9 @@ public class TextMessageViewer : MonoBehaviour
 
     private IEnumerator waitCoroutine;
     private Tween tween;
+
+    public GameDirector gameDirector;
+
     void Start()
     {
         tapIconObj.SetActive(false);
@@ -139,10 +142,7 @@ public class TextMessageViewer : MonoBehaviour
 
     private IEnumerator NextTouch()
     {
-        yield return null;
-        wordCount = messages[messagesIndex].Length;
-
-        tapIconObj.SetActive(true);
+        
 
         yield return new WaitUntil(() => isTapped);
 
@@ -159,6 +159,7 @@ public class TextMessageViewer : MonoBehaviour
         {
             isDisplayedAllMessage = true;
             Debug.Log("全メッセージ表示終了");
+            StartCoroutine(gameDirector.CreateBranchSelectButton(branchs.Length));
         }
     }
 }

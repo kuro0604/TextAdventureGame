@@ -218,7 +218,7 @@ MonoBehaviour:
   canvasGroup: {fileID: 2126659233107630594}
   branchNo: 0
   isClickable: 0
-  easeType: 0
+  easeType: 1
 --- !u!225 &2126659233107630594
 CanvasGroup:
   m_ObjectHideFlags: 0

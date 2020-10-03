@@ -49,7 +49,7 @@ public class BranchSelectButton : MonoBehaviour
 
         sequence = DOTween.Sequence();
 
-        sequence.Append(transform.DOLocalMoveX(4000, 1.0f).SetEase(easeType))
+        sequence.Append(transform.DOLocalMoveX(2000, 1.0f).SetEase(easeType))
             .Join(canvasGroup.DOFade(0.0f, 1.0f))
             .AppendCallback(() =>
             {

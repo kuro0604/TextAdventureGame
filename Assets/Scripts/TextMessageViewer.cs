@@ -154,7 +154,7 @@ public class TextMessageViewer : MonoBehaviour
                 {
                     Debug.Log("文字送りで 全文表示 完了");
 
-                    //tapIconObj.SetActive(true);
+                    
 
                     CompleteOneMessage();
 
@@ -162,7 +162,6 @@ public class TextMessageViewer : MonoBehaviour
             waitCoroutine = WaitTime();
             yield return StartCoroutine(waitCoroutine);
         }
-        //StartCoroutine(NextTouch());
     }
 
     /// <summary>

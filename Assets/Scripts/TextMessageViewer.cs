@@ -7,15 +7,22 @@ using DG.Tweening;
 public class TextMessageViewer : MonoBehaviour
 {
     public string[] messages;
-    public Text txtMessage;
+
+    public int[] branchs;
+    public Dictionary<int, CHARA_NAME_TYPE[]> displayCharas;
+    public CHARA_NAME_TYPE[] charaTypes;
     public float wordSpeed;
 
-    public CHARA_NAME_TYPE[] charaTypes;
+
     public Text txtCharaType;
+    public Text txtMessage;
+    public Image imgBackground;
+    public List<DisplayChara> displayCharasList;
+    public Transform charaTran;
 
     public GameObject tapIconObj;
 
-    public int[] branchs;
+
 
     private int messagesIndex = 0;
     private int wordCount;
@@ -47,23 +54,32 @@ public class TextMessageViewer : MonoBehaviour
         branchs = new int[scenarioData.branchs.Length];
         branchs = scenarioData.branchs;
 
+        displayCharas = new Dictionary<int, CHARA_NAME_TYPE[]>(scenarioData.displayCharas);
+
         messagesIndex = 0;
         isDisplayedAllMessage = false;
+
+        imgBackground.sprite = Resources.Load<Sprite>("BackGround/" + scenarioData.backgroundImageNo);
 
         StartCoroutine(DisplayMessage());
         Debug.Log("シナリオ　再生開始");
 
     }
 
-    
+
     void Update()
     {
-        if(isDisplayedAllMessage)
+        if (isDisplayedAllMessage)
         {
             return;
         }
 
-        if(Input.GetMouseButtonDown(0) && tween != null)
+        if (Input.GetMouseButtonDown(0) && wordCount == messages[messagesIndex].Length)
+        {
+            isTapped = true;
+        }
+
+        if (Input.GetMouseButtonDown(0) && tween != null)
         {
             tween.Kill();
             tween = null;
@@ -78,13 +94,12 @@ public class TextMessageViewer : MonoBehaviour
 
             Debug.Log("文字送りスキップ　1ページまとめて表示");
 
+            
+
             StartCoroutine(NextTouch());
         }
 
-        if (Input.GetMouseButtonDown(0) && wordCount == messages[messagesIndex].Length)
-        {
-            isTapped = true;
-        }
+
     }
 
 
@@ -109,9 +124,27 @@ public class TextMessageViewer : MonoBehaviour
             waitCoroutine = null;
         }
 
-        if(charaTypes[messagesIndex] != CHARA_NAME_TYPE.NO_NAME)
+        if (charaTypes[messagesIndex] != CHARA_NAME_TYPE.NO_NAME)
         {
             txtCharaType.text = charaTypes[messagesIndex].ToString();
+        }
+
+        foreach (DisplayChara chara in displayCharasList)
+        {
+            chara.gameObject.SetActive(false);
+            foreach (KeyValuePair<int, CHARA_NAME_TYPE[]> item in displayCharas)
+            {
+                if (item.Key == messagesIndex)
+                {
+                    for (int i = 0; i < item.Value.Length; i++)
+                    {
+                        if (item.Value[i] == chara.charaNameType)
+                        {
+                            chara.gameObject.SetActive(true);
+                        }
+                    }
+                }
+            }
         }
 
         while (messages[messagesIndex].Length > wordCount)
@@ -138,11 +171,11 @@ public class TextMessageViewer : MonoBehaviour
     {
         yield return new WaitForSeconds(messages[messagesIndex].Length * wordSpeed);
     }
-    
+
 
     private IEnumerator NextTouch()
     {
-        
+
 
         yield return new WaitUntil(() => isTapped);
 
@@ -151,7 +184,7 @@ public class TextMessageViewer : MonoBehaviour
         messagesIndex++;
         wordCount = 0;
 
-        if(messagesIndex < messages.Length)
+        if (messagesIndex < messages.Length)
         {
             StartCoroutine(DisplayMessage());
         }
@@ -159,7 +192,26 @@ public class TextMessageViewer : MonoBehaviour
         {
             isDisplayedAllMessage = true;
             Debug.Log("全メッセージ表示終了");
-            StartCoroutine(gameDirector.CreateBranchSelectButton(branchs.Length));
+
+            if (JudgeEnding())
+            {
+                for (int i = 0; i < displayCharasList.Count; i++)
+                {
+                    displayCharasList[i].gameObject.SetActive(false);
+                }
+            }
+            else
+            {
+                StartCoroutine(gameDirector.CreateBranchSelectButton(branchs.Length));
+            }
         }
+    }
+
+    private bool JudgeEnding()
+    {
+
+
+        return false;
+
     }
 }

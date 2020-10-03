@@ -29,7 +29,7 @@ public class GameDirector : MonoBehaviour
         currentScenarioNo = nextScenarioNo;
 
         Scenario.Param scenarioData = GameData.instance.scenarioSO.sheets[0].list.Find(x => x.senarioNo == currentScenarioNo);
-
+        Debug.Log(scenarioData);
         textMessageViewer.SetUpScenarioData(scenarioData);
     }
 

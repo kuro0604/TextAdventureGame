@@ -26,7 +26,7 @@ public class BranchSelectButton : MonoBehaviour
 
         sequence = DOTween.Sequence();
 
-        sequence.Append(transform.DOLocalMoveX(2000, 1.0f).SetEase(easeType));
+        sequence.Append(transform.DOLocalMoveX(1000, 1.0f).SetEase(easeType));
         sequence.Join(canvasGroup.DOFade(1.0f, 1.0f));
 
         txtBranchMessage.text = message;

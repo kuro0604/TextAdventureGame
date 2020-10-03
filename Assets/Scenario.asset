@@ -18,13 +18,13 @@ MonoBehaviour:
     - senarioNo: 0
       messageString: aaaa
       charaNoString: 1
-      branchString: '1 '
+      branchString: '0 '
       displayCharaString: 2
       backgroundImageNo: 0
       messages:
       - aaaa
       charaTypes: 01000000
-      branchs: 01000000
+      branchs: 00000000
     - senarioNo: 1
       messageString: ssss
       charaNoString: 1

@@ -94,7 +94,7 @@ public class TextMessageViewer : MonoBehaviour
 
             Debug.Log("文字送りスキップ　1ページまとめて表示");
 
-            
+            CompleteOneMessage();
 
             StartCoroutine(NextTouch());
         }
@@ -154,13 +154,15 @@ public class TextMessageViewer : MonoBehaviour
                 {
                     Debug.Log("文字送りで 全文表示 完了");
 
-                    tapIconObj.SetActive(true);
+                    //tapIconObj.SetActive(true);
+
+                    CompleteOneMessage();
 
                 });
             waitCoroutine = WaitTime();
             yield return StartCoroutine(waitCoroutine);
         }
-        StartCoroutine(NextTouch());
+        //StartCoroutine(NextTouch());
     }
 
     /// <summary>
@@ -213,5 +215,11 @@ public class TextMessageViewer : MonoBehaviour
 
         return false;
 
+    }
+
+    private void CompleteOneMessage()
+    {
+        wordCount = messages[messagesIndex].Length;
+        tapIconObj.SetActive(true);
     }
 }

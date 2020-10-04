@@ -37,6 +37,8 @@ public class GameData : MonoBehaviour
             scenarioData.charaTypes = scenarioData.charaNoString.Split(',').Select(x => (CHARA_NAME_TYPE)Enum.Parse(typeof(CHARA_NAME_TYPE), x)).ToArray();
 
             scenarioData.branchs = scenarioData.branchString.Split(',').Select(x => int.Parse(x)).ToArray();
+            
+            scenarioData.branchMessages = scenarioData.branchMessageString.Split(',').ToArray();
 
             List<string> strList = scenarioData.displayCharaString.Split('/').ToList();
 

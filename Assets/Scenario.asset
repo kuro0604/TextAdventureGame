@@ -16,62 +16,94 @@ MonoBehaviour:
   - name: Sheet1
     list:
     - senarioNo: 0
-      messageString: aaaa
+      messageString: aaaa,bbbb,ccc
       charaNoString: 1
-      branchString: '0 '
+      branchString: '-1 '
       displayCharaString: 2
       backgroundImageNo: 0
+      bgmNo: 0
+      branchMessageString: 
+      autoScenarioNo: 0
       messages:
       - aaaa
+      - bbbb
+      - ccc
       charaTypes: 01000000
-      branchs: 00000000
+      branchs: ffffffff
+      branchMessages:
+      - 
     - senarioNo: 1
       messageString: ssss
       charaNoString: 1
-      branchString: 1
+      branchString: -1
       displayCharaString: 1
-      backgroundImageNo: 2
+      backgroundImageNo: 1
+      bgmNo: 0
+      branchMessageString: 
+      autoScenarioNo: 0
       messages:
       - ssss
       charaTypes: 01000000
-      branchs: 01000000
+      branchs: ffffffff
+      branchMessages:
+      - 
     - senarioNo: 2
       messageString: xxxxx
       charaNoString: 1
-      branchString: 2
+      branchString: '-1 '
       displayCharaString: 1
       backgroundImageNo: 2
+      bgmNo: 0
+      branchMessageString: 
+      autoScenarioNo: 0
       messages:
       - xxxxx
       charaTypes: 01000000
-      branchs: 02000000
+      branchs: ffffffff
+      branchMessages:
+      - 
     - senarioNo: 3
       messageString: aaaa
       charaNoString: 1
-      branchString: 1
+      branchString: '-1 '
       displayCharaString: 1
       backgroundImageNo: 2
+      bgmNo: 0
+      branchMessageString: 
+      autoScenarioNo: 0
       messages:
       - aaaa
       charaTypes: 01000000
-      branchs: 01000000
+      branchs: ffffffff
+      branchMessages:
+      - 
     - senarioNo: 4
       messageString: cccc
       charaNoString: 1
-      branchString: 2
+      branchString: -1
       displayCharaString: 1
       backgroundImageNo: 2
+      bgmNo: 0
+      branchMessageString: 
+      autoScenarioNo: 0
       messages:
       - cccc
       charaTypes: 01000000
-      branchs: 02000000
+      branchs: ffffffff
+      branchMessages:
+      - 
     - senarioNo: 5
       messageString: dddd
       charaNoString: 1
-      branchString: 1
+      branchString: -1
       displayCharaString: 1
       backgroundImageNo: 2
+      bgmNo: 0
+      branchMessageString: 
+      autoScenarioNo: 0
       messages:
       - dddd
       charaTypes: 01000000
-      branchs: 01000000
+      branchs: ffffffff
+      branchMessages:
+      - 

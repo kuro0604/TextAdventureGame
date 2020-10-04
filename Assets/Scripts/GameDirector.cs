@@ -33,13 +33,13 @@ public class GameDirector : MonoBehaviour
         textMessageViewer.SetUpScenarioData(scenarioData);
     }
 
-    public IEnumerator CreateBranchSelectButton(int branchCount)
+    public IEnumerator CreateBranchSelectButton(string[] branchMessages)
     {
-        for (int i = 0; i < branchCount; i++)
+        for (int i = 0; i < branchMessages.Length; i++)
         {
             BranchSelectButton branchSelectButton = Instantiate(BranchSelectButtonPrefab, branchButtonTran, false);
 
-            branchSelectButton.InitializeBranchSelect("選択肢" + i, i, this, i);
+            branchSelectButton.InitializeBranchSelect(branchMessages[i], i, this, i);
             branchSelectButtonList.Add(branchSelectButton);
             yield return new WaitForSeconds(0.5f);
         }

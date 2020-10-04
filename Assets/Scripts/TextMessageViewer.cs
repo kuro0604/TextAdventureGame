@@ -7,13 +7,15 @@ using DG.Tweening;
 public class TextMessageViewer : MonoBehaviour
 {
     public string[] messages;
-
     public int[] branchs;
     public Dictionary<int, CHARA_NAME_TYPE[]> displayCharas;
     public CHARA_NAME_TYPE[] charaTypes;
+    
+    
+    public int bgmNo;
+    public string[] branchMessages;
+
     public float wordSpeed;
-
-
     public Text txtCharaType;
     public Text txtMessage;
     public Image imgBackground;
@@ -33,6 +35,8 @@ public class TextMessageViewer : MonoBehaviour
     private Tween tween;
 
     public GameDirector gameDirector;
+
+    public int autoScenarioNo;
 
     void Start()
     {
@@ -55,6 +59,15 @@ public class TextMessageViewer : MonoBehaviour
         branchs = scenarioData.branchs;
 
         displayCharas = new Dictionary<int, CHARA_NAME_TYPE[]>(scenarioData.displayCharas);
+
+        bgmNo = scenarioData.bgmNo;
+
+        SoundManager.instance.PlayBGM((SoundManager.BGM_Type)bgmNo);
+
+        branchMessages = new string[scenarioData.branchMessages.Length];
+        branchMessages = scenarioData.branchMessages;
+
+        autoScenarioNo = scenarioData.autoScenarioNo;
 
         messagesIndex = 0;
         isDisplayedAllMessage = false;
@@ -203,7 +216,15 @@ public class TextMessageViewer : MonoBehaviour
             }
             else
             {
-                StartCoroutine(gameDirector.CreateBranchSelectButton(branchs.Length));
+                if(branchs[0] == -1)
+                {
+                    gameDirector.ChooseBranch(autoScenarioNo);
+                }
+                else
+                {
+                    StartCoroutine(gameDirector.CreateBranchSelectButton(branchMessages));
+                }
+                
             }
         }
     }

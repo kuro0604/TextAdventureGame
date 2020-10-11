@@ -2,16 +2,16 @@
 %TAG !u! tag:unity3d.com,2011:
 --- !u!114 &11400000
 MonoBehaviour:
-  m_ObjectHideFlags: 8
+  m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
+  m_Script: {fileID: 11500000, guid: 93b3d922efa33b54db32abc9f03a3f25, type: 3}
   m_Name: Scenario
-  m_EditorClassIdentifier: Assembly-CSharp::Scenario
+  m_EditorClassIdentifier: 
   sheets:
   - name: Sheet1
     list:
@@ -22,12 +22,16 @@ MonoBehaviour:
       displayCharaString: 0,1,0
       backgroundImageNo: 0
       bgmNo: 0
-      branchMessageString: 
-      autoScenarioNo: 0
-      messages: []
-      charaTypes: 
-      branchs: 
-      branchMessages: []
+      branchMessageString: 1
+      autoScenarioNo: 1
+      messages:
+      - aaaa
+      - bbbb
+      - ccc
+      charaTypes: 020000000200000002000000
+      branchs: ffffffff
+      branchMessages:
+      - 1
     - senarioNo: 1
       messageString: ssss
       charaNoString: 1
@@ -35,61 +39,71 @@ MonoBehaviour:
       displayCharaString: 1
       backgroundImageNo: 1
       bgmNo: 0
-      branchMessageString: 
-      autoScenarioNo: 0
-      messages: []
-      charaTypes: 
-      branchs: 
-      branchMessages: []
+      branchMessageString: 2
+      autoScenarioNo: 2
+      messages:
+      - ssss
+      charaTypes: 01000000
+      branchs: ffffffff
+      branchMessages:
+      - 2
     - senarioNo: 2
       messageString: xxxxx
       charaNoString: 1
       branchString: '-1 '
       displayCharaString: 1
       backgroundImageNo: 2
-      bgmNo: 0
-      branchMessageString: 
-      autoScenarioNo: 0
-      messages: []
-      charaTypes: 
-      branchs: 
-      branchMessages: []
+      bgmNo: 1
+      branchMessageString: 3
+      autoScenarioNo: 3
+      messages:
+      - xxxxx
+      charaTypes: 01000000
+      branchs: ffffffff
+      branchMessages:
+      - 3
     - senarioNo: 3
       messageString: aaaa
       charaNoString: 1
       branchString: '-1 '
       displayCharaString: 1
       backgroundImageNo: 2
-      bgmNo: 0
-      branchMessageString: 
-      autoScenarioNo: 0
-      messages: []
-      charaTypes: 
-      branchs: 
-      branchMessages: []
+      bgmNo: 1
+      branchMessageString: 4
+      autoScenarioNo: 4
+      messages:
+      - aaaa
+      charaTypes: 01000000
+      branchs: ffffffff
+      branchMessages:
+      - 4
     - senarioNo: 4
       messageString: cccc
       charaNoString: 1
       branchString: -1
       displayCharaString: 1
       backgroundImageNo: 2
-      bgmNo: 0
-      branchMessageString: 
-      autoScenarioNo: 0
-      messages: []
-      charaTypes: 
-      branchs: 
-      branchMessages: []
+      bgmNo: 1
+      branchMessageString: 5
+      autoScenarioNo: 5
+      messages:
+      - cccc
+      charaTypes: 01000000
+      branchs: ffffffff
+      branchMessages:
+      - 5
     - senarioNo: 5
       messageString: dddd
       charaNoString: 1
       branchString: -1
       displayCharaString: 1
       backgroundImageNo: 2
-      bgmNo: 0
-      branchMessageString: 
-      autoScenarioNo: 0
-      messages: []
-      charaTypes: 
-      branchs: 
-      branchMessages: []
+      bgmNo: 1
+      branchMessageString: 6
+      autoScenarioNo: 6
+      messages:
+      - dddd
+      charaTypes: 01000000
+      branchs: ffffffff
+      branchMessages:
+      - 6

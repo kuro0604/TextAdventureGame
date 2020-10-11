@@ -9,17 +9,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 93b3d922efa33b54db32abc9f03a3f25, type: 3}
+  m_Script: {fileID: 0}
   m_Name: Scenario
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier: Assembly-CSharp::Scenario
   sheets:
   - name: Sheet1
     list:
     - senarioNo: 0
       messageString: aaaa,bbbb,ccc
-      charaNoString: 1
+      charaNoString: 2,2,2
       branchString: '-1 '
-      displayCharaString: 2
+      displayCharaString: 0,1,0
       backgroundImageNo: 0
       bgmNo: 0
       branchMessageString: 

@@ -59,6 +59,7 @@ public class Scenario_importer : AssetPostprocessor {
 					cell = row.GetCell(6); p.bgmNo = (int)(cell == null ? 0 : cell.NumericCellValue);
 					cell = row.GetCell(7); p.branchMessageString = (cell == null ? "" : cell.StringCellValue);
 					cell = row.GetCell(8); p.autoScenarioNo = (int)(cell == null ? 0 : cell.NumericCellValue);
+					cell = row.GetCell(9); p.endingNo = (int)(cell == null ? 0 : cell.NumericCellValue);
 						s.list.Add (p);
 					}
 					data.sheets.Add(s);

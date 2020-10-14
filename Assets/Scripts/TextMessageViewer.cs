@@ -38,6 +38,9 @@ public class TextMessageViewer : MonoBehaviour
 
     public int autoScenarioNo;
 
+    public int endingNo;
+
+
     void Start()
     {
         tapIconObj.SetActive(false);
@@ -68,6 +71,11 @@ public class TextMessageViewer : MonoBehaviour
         branchMessages = scenarioData.branchMessages;
 
         autoScenarioNo = scenarioData.autoScenarioNo;
+
+        if(scenarioData.endingNo != 0)
+        {
+            endingNo = scenarioData.endingNo;
+        }
 
         messagesIndex = 0;
         isDisplayedAllMessage = false;
@@ -213,6 +221,8 @@ public class TextMessageViewer : MonoBehaviour
                 {
                     displayCharasList[i].gameObject.SetActive(false);
                 }
+                GameData.instance.SaveEndingData(endingNo);
+                Debug.Log("Ending SaveNo :" + endingNo);
             }
             else
             {
@@ -231,8 +241,10 @@ public class TextMessageViewer : MonoBehaviour
 
     private bool JudgeEnding()
     {
-
-
+        if(endingNo != 0)
+        {
+            return true;
+        }
         return false;
 
     }

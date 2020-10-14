@@ -26,7 +26,7 @@ public class Scenario : ScriptableObject
 		public int bgmNo;
 		public string branchMessageString;
 		public int autoScenarioNo;
-
+		public int endingNo;
 
 		public string[] messages;
 		public CHARA_NAME_TYPE[] charaTypes;
@@ -35,5 +35,4 @@ public class Scenario : ScriptableObject
 		public string[] branchMessages;
 	}
 }
-
 

@@ -3,11 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using System.Linq;
+using System.Runtime.Remoting.Messaging;
 
 public class GameData : MonoBehaviour
 {
     public static GameData instance;
     public Scenario scenarioSO;
+
+    public int endingCount;
+    public List<int> endingNos = new List<int>();
+    private string ENDING = "ending_";
 
     void Awake()
     {
@@ -57,4 +62,23 @@ public class GameData : MonoBehaviour
         }
         Debug.Log("Create ScenarioDataList");
     }
+
+    public void SaveEndingData(int endingNo)
+    {
+        PlayerPrefs.SetInt(ENDING + endingNo.ToString(), endingNo);
+        PlayerPrefs.Save();
+    }
+
+    public bool LoadCheckEndingData()
+    {
+        for (int i = 1; i < endingCount +1 ; i++)
+        {
+            if (PlayerPrefs.HasKey(ENDING + i.ToString()))
+                {
+                endingNos.Add(PlayerPrefs.GetInt(ENDING + i.ToString(), 0));
+                }
+        }
+        return endingCount == endingNos.Count ? true : false;
+    }
+
 }

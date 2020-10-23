@@ -45,6 +45,8 @@ public class TextMessageViewer : MonoBehaviour
     {
         tapIconObj.SetActive(false);
 
+        // ワードスピードの設定
+        wordSpeed = GameData.instance.WordSpeed;
         //StartCoroutine(DisplayMessage());
     }
 

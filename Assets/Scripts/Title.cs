@@ -1,12 +1,15 @@
-﻿using System.Collections;
+﻿using DG.Tweening;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-public class LoadMainScript : MonoBehaviour
+public class Title : MonoBehaviour
 {
     public bool isNewGameButton;
     public Button btnNewGame;
+    public Button btnOption;
+    public OptionWindow optionWindow;
     public void LoadMain()
     {
         SceneManager.LoadScene("Game");
@@ -23,9 +26,15 @@ public class LoadMainScript : MonoBehaviour
         {
             btnNewGame.gameObject.SetActive(true);
         }
+        btnOption.onClick.AddListener(OnClickOpenWindow);
     }
     public void OnClickNewGameButton()
     {
 
+    }
+
+    public void OnClickOpenWindow()
+    {
+        optionWindow.canvasGroup.DOFade(1.0f, 1.0f);
     }
 }

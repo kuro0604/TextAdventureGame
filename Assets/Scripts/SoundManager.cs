@@ -20,8 +20,8 @@ public class SoundManager : MonoBehaviour
 
     public const float CROSS_FADE_TIME = 1.0f;
 
-    public float BGM_Volume = 0.1f;
-    public float SE_Volume = 0.2f;
+    
+    
     public bool Mute = false;
 
     public AudioClip[] BGM_Clips;
@@ -61,13 +61,13 @@ public class SoundManager : MonoBehaviour
     {
         if(!isCrossFanding)
         {
-            BGM_Sources[0].volume = BGM_Volume;
-            BGM_Sources[1].volume = BGM_Volume;
+            BGM_Sources[0].volume = GameData.instance.BGM_Volume;
+            BGM_Sources[1].volume = GameData.instance.BGM_Volume;
         }
 
         foreach(AudioSource source in SE_Sources)
         {
-            source.volume = SE_Volume;
+            source.volume = GameData.instance.SE_Volume;
         }
     }
 

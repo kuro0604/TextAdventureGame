@@ -10,9 +10,14 @@ public class GameData : MonoBehaviour
     public static GameData instance;
     public Scenario scenarioSO;
 
+
     public int endingCount;
     public List<int> endingNos = new List<int>();
     private string ENDING = "ending_";
+
+    public float WordSpeed;
+    public float BGM_Volume = 0.1f;
+    public float SE_Volume = 0.2f;
 
     void Awake()
     {

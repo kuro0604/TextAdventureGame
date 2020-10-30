@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 
+
 public class TextMessageViewer : MonoBehaviour
 {
     public string[] messages;
@@ -24,6 +25,8 @@ public class TextMessageViewer : MonoBehaviour
 
     public GameObject tapIconObj;
 
+    public Button skipbtn;
+
 
 
     private int messagesIndex = 0;
@@ -34,12 +37,17 @@ public class TextMessageViewer : MonoBehaviour
     private IEnumerator waitCoroutine;
     private Tween tween;
 
+    private bool isSkip = false;
+
     public GameDirector gameDirector;
 
     public int autoScenarioNo;
 
     public int endingNo;
 
+
+    public Button btnOption;
+    public OptionWindow optionWindow;
 
     void Start()
     {
@@ -48,6 +56,8 @@ public class TextMessageViewer : MonoBehaviour
         // ワードスピードの設定
         wordSpeed = GameData.instance.WordSpeed;
         //StartCoroutine(DisplayMessage());
+
+        btnOption.onClick.AddListener(OnClickOpenWindow);
     }
 
     public void SetUpScenarioData(Scenario.Param scenarioData)
@@ -255,5 +265,23 @@ public class TextMessageViewer : MonoBehaviour
     {
         wordCount = messages[messagesIndex].Length;
         tapIconObj.SetActive(true);
+    }
+
+    public void OnClickSkip()
+    {
+        
+        isSkip = !isSkip;
+        if(isSkip == true)
+        {
+            Debug.Log("スキップ中");
+        }
+        else
+        {
+            Debug.Log("スキップ終了");
+        }
+    }
+    public void OnClickOpenWindow()
+    {
+        optionWindow.canvasGroup.DOFade(1.0f, 1.0f);
     }
 }

@@ -6,6 +6,9 @@ using System.Linq;
 
 public class GameData : MonoBehaviour
 {
+    private string READ_BRANCH_NO = "readBranchNo_";
+    public List<int> readBranchNoList = new List<int>();
+
     public static GameData instance;
     public Scenario scenarioSO;
 
@@ -14,9 +17,11 @@ public class GameData : MonoBehaviour
     public List<int> endingNos = new List<int>();
     private string ENDING = "ending_";
 
-    public float WordSpeed;
+    public float WordSpeed = 0.5f;
     public float BGM_Volume = 0.1f;
     public float SE_Volume = 0.2f;
+
+    public float WordWaitTime = 1.0f;
 
     void Awake()
     {
@@ -85,4 +90,29 @@ public class GameData : MonoBehaviour
         return endingCount == endingNos.Count ? true : false;
     }
 
+    public void SaveReadBranchNo(int branchNo)
+    {
+        PlayerPrefs.SetInt(READ_BRANCH_NO + branchNo.ToString(), branchNo);
+        PlayerPrefs.Save();
+    }
+
+    public void LoadReadBranchNos()
+    {
+        for (int i = 0; i < scenarioSO.sheets.Count; i++)
+        {
+            if (PlayerPrefs.HasKey(READ_BRANCH_NO + i.ToString()))
+            {
+
+
+
+                Debug.Log("既読シナリオ番号　: " + PlayerPrefs.GetInt(READ_BRANCH_NO + ToString()));
+            }
+        }
+
+        if (readBranchNoList.Count == 0)
+        {
+            Debug.Log("既読シナリオなし");
+        }
+
+    }
 }

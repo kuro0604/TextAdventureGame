@@ -9,6 +9,7 @@ public class GameOptionWindow : MonoBehaviour
     public Slider WordSpeedSlider;
     public Slider BGMVolumeSlider;
     public Slider SEVolumeSlider;
+    public Slider WordWaitSlider;
     public Text SampleText;
     public Button CloseButton;
     public CanvasGroup canvasGroup;
@@ -25,6 +26,7 @@ public class GameOptionWindow : MonoBehaviour
         WordSpeedSlider.onValueChanged.AddListener(ChangeWordSpeed);
         BGMVolumeSlider.onValueChanged.AddListener(ChangeBGMVolume);
         SEVolumeSlider.onValueChanged.AddListener(ChangeSEVolume);
+        WordWaitSlider.onValueChanged.AddListener(ChangeWordWaitTime);
         CloseButton.onClick.AddListener(OnClickCloseWindow);
     }
 
@@ -61,6 +63,12 @@ public class GameOptionWindow : MonoBehaviour
     {
         GameData.instance.SE_Volume = value;
         Debug.Log(GameData.instance.SE_Volume);
+    }
+
+    public void ChangeWordWaitTime(float value)
+    {
+        GameData.instance.WordWaitTime = value;
+        Debug.Log(GameData.instance.WordWaitTime);
     }
 
     public void OnClickCloseWindow()

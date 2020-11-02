@@ -20,6 +20,7 @@ public class Title : MonoBehaviour
         if (GameData.instance.endingCount > 0)
         {
             isNewGameButton = GameData.instance.LoadCheckEndingData();
+            CheckEndingCount();
         }
 
         if (isNewGameButton == true)
@@ -27,6 +28,24 @@ public class Title : MonoBehaviour
             btnNewGame.gameObject.SetActive(true);
         }
         btnOption.onClick.AddListener(OnClickOpenWindow);
+
+        GameData.instance.LoadReadBranchNos();
+    }
+
+    private void CheckEndingCount()
+    {
+        isNewGameButton = GameData.instance.LoadCheckEndingData();
+
+        if(isNewGameButton == true)
+        {
+            btnNewGame.gameObject.SetActive(true);
+            btnNewGame.onClick.AddListener(OnClickNewGameButton);
+        }
+    }
+
+    public void LoadGameScene()
+    {
+        SceneManager.LoadScene("Game");
     }
     public void OnClickNewGameButton()
     {

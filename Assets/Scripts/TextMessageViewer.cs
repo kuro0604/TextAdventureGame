@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
+using UnityEngine.EventSystems;
 
 
 public class TextMessageViewer : MonoBehaviour
@@ -25,7 +26,15 @@ public class TextMessageViewer : MonoBehaviour
 
     public GameObject tapIconObj;
 
-    public Button skipbtn;
+    public Button btnSkip;
+
+    public bool isSkipReadingMessage;
+    public bool isReadBranchNo;
+    public int currentBranchNo;
+    public float skipSpeed = 0f;
+    private float currentWordSpeed;
+
+
 
 
 
@@ -47,7 +56,12 @@ public class TextMessageViewer : MonoBehaviour
 
 
     public Button btnOption;
-    public OptionWindow optionWindow;
+    public GameOptionWindow optionWindow;
+
+    public Button btnAutoPlay;
+    public bool isAutoPlay;
+
+    public float WordWaitTime;
 
     void Start()
     {
@@ -58,11 +72,17 @@ public class TextMessageViewer : MonoBehaviour
         //StartCoroutine(DisplayMessage());
 
         btnOption.onClick.AddListener(OnClickOpenWindow);
+
+        btnAutoPlay.onClick.AddListener(OnClickAutoPlay);
+
+        btnSkip.onClick.AddListener(OnClickSkipReadingMessage);
+        currentWordSpeed = wordSpeed;
+
     }
 
     public void SetUpScenarioData(Scenario.Param scenarioData)
     {
-        //Debug.Log("シナリオ番号 : " + scenarioData.senarioNo  + " のシナリオデータをセット");
+        Debug.Log("シナリオ番号 : " + scenarioData.senarioNo  + " のシナリオデータをセット");
 
         messages = new string[scenarioData.charaTypes.Length];
         messages = scenarioData.messages;
@@ -86,13 +106,32 @@ public class TextMessageViewer : MonoBehaviour
 
         if(scenarioData.endingNo != 0)
         {
-            endingNo = scenarioData.endingNo;
+           endingNo = scenarioData.endingNo;
         }
 
         messagesIndex = 0;
-        isDisplayedAllMessage = false;
+       // isDisplayedAllMessage = false;
 
         imgBackground.sprite = Resources.Load<Sprite>("BackGround/" + scenarioData.backgroundImageNo);
+
+        isReadBranchNo = false;
+        currentBranchNo = scenarioData.senarioNo;
+
+        foreach (int readBranchNo in GameData.instance.readBranchNoList)
+        {
+            if (readBranchNo == currentBranchNo)
+            {
+                isReadBranchNo = true;
+            }
+        }
+
+        if(!isReadBranchNo)
+        {
+            isAutoPlay = false;
+            currentWordSpeed = wordSpeed;
+        }
+
+        SkipMessage();
 
         StartCoroutine(DisplayMessage());
         Debug.Log("シナリオ　再生開始");
@@ -109,11 +148,20 @@ public class TextMessageViewer : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0) && wordCount == messages[messagesIndex].Length)
         {
+
+            if(EventSystem.current.currentSelectedGameObject != null)
+            {
+                return;
+            }
             isTapped = true;
         }
 
         if (Input.GetMouseButtonDown(0) && tween != null)
         {
+            if(EventSystem.current.currentSelectedGameObject != null)
+            {
+                return;
+            }
             tween.Kill();
             tween = null;
 
@@ -182,7 +230,7 @@ public class TextMessageViewer : MonoBehaviour
 
         while (messages[messagesIndex].Length > wordCount)
         {
-            tween = txtMessage.DOText(messages[messagesIndex], messages[messagesIndex].Length * wordSpeed).
+            tween = txtMessage.DOText(messages[messagesIndex], messages[messagesIndex].Length * currentWordSpeed).
                 SetEase(Ease.Linear).OnComplete(() =>
                 {
                     Debug.Log("文字送りで 全文表示 完了");
@@ -191,9 +239,17 @@ public class TextMessageViewer : MonoBehaviour
 
                     CompleteOneMessage();
 
+                    if(isAutoPlay)
+                    {
+                        StartCoroutine(NextTouch());
+                        Debug.Log("オート再生中");
+                    }
+
                 });
             waitCoroutine = WaitTime();
             yield return StartCoroutine(waitCoroutine);
+
+            break;
         }
     }
 
@@ -203,7 +259,7 @@ public class TextMessageViewer : MonoBehaviour
     /// </summary>
     private IEnumerator WaitTime()
     {
-        yield return new WaitForSeconds(messages[messagesIndex].Length * wordSpeed);
+        yield return new WaitForSeconds(messages[messagesIndex].Length * currentWordSpeed);
     }
 
 
@@ -211,7 +267,15 @@ public class TextMessageViewer : MonoBehaviour
     {
 
 
-        yield return new WaitUntil(() => isTapped);
+        if(!isAutoPlay)
+        {
+            yield return new WaitUntil(() => isTapped);
+            Debug.Log("非オート。タップ待ち");
+        }
+        else
+        {
+            yield return new WaitForSeconds(WordWaitTime);
+        }
 
         tapIconObj.SetActive(false);
 
@@ -226,6 +290,8 @@ public class TextMessageViewer : MonoBehaviour
         {
             isDisplayedAllMessage = true;
             Debug.Log("全メッセージ表示終了");
+
+            GameData.instance.SaveReadBranchNo(currentBranchNo);
 
             if (JudgeEnding())
             {
@@ -284,4 +350,47 @@ public class TextMessageViewer : MonoBehaviour
     {
         optionWindow.canvasGroup.DOFade(1.0f, 1.0f);
     }
+
+    public void OnClickAutoPlay()
+    {
+        isAutoPlay = !isAutoPlay;
+
+        if(isAutoPlay)
+        {
+            btnAutoPlay.image.color = btnAutoPlay.colors.pressedColor;
+
+        }
+        else
+        {
+            btnAutoPlay.image.color = btnAutoPlay.colors.normalColor;
+        }
+    }
+
+    public void OnClickSkipReadingMessage()
+    {
+        isSkipReadingMessage = !isSkipReadingMessage;
+
+        if(isSkipReadingMessage)
+        {
+            btnSkip.image.color = btnSkip.colors.pressedColor;
+
+        }
+        else
+        {
+            btnSkip.image.color = btnSkip.colors.normalColor;
+        }
+
+        SkipMessage();
+    }
+
+    private void SkipMessage()
+    {
+        if(isSkipReadingMessage && isReadBranchNo)
+        {
+            isAutoPlay = true;
+            currentWordSpeed = skipSpeed;
+            Debug.Log("既読スキップ中");
+        }
+    }
+
 }

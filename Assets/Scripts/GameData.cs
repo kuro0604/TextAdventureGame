@@ -23,6 +23,11 @@ public class GameData : MonoBehaviour
 
     public float WordWaitTime = 1.0f;
 
+    public int loadBranchNo;
+
+    private string CURRENT_BRANCH_NO = "currentBranchNo_";
+    private string SAVE_TIME_NO = "saveTimeNo_";
+
     void Awake()
     {
         if(instance == null)
@@ -114,5 +119,32 @@ public class GameData : MonoBehaviour
             Debug.Log("既読シナリオなし");
         }
 
+    }
+
+    public void Save(int currentBranchNo)
+    {
+        PlayerPrefs.SetInt(CURRENT_BRANCH_NO + currentBranchNo.ToString(), currentBranchNo);
+
+        PlayerPrefs.SetString(SAVE_TIME_NO + currentBranchNo.ToString(), DateTime.Now.ToString());
+
+        PlayerPrefs.Save();
+
+        Debug.Log("Save : " + CURRENT_BRANCH_NO + currentBranchNo + " : 時間 : " + DateTime.Now.ToString());
+    }
+
+    public Dictionary<int, string> GetSaveDatas()
+    {
+        Dictionary<int, string> saveDatas = new Dictionary<int, string>();
+        for(int i = 0; i < scenarioSO.sheets[0].list.Count; i++)
+        {
+            if(PlayerPrefs.HasKey(CURRENT_BRANCH_NO + i.ToString()))
+            {
+                saveDatas.Add(PlayerPrefs.GetInt(CURRENT_BRANCH_NO + i.ToString()), PlayerPrefs.GetString(SAVE_TIME_NO + i.ToString()));
+
+                Debug.Log("保存データ　分岐番号 : " + CURRENT_BRANCH_NO + i.ToString());
+                Debug.Log("時間 : " + SAVE_TIME_NO + i.ToString());
+            }
+        }
+        return saveDatas;
     }
 }
